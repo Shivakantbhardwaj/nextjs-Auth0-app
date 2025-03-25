@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import axios from "axios";
+import Link from "next/link";
 
 function Index() {
   const { user, error, isLoading } = useUser();
@@ -32,13 +33,21 @@ function Index() {
   if (user) {
     return (
       <div>
-        Welcome {user.name}! <a href="/api/auth/logout">Logout</a>
+        Welcome {user.name}!  
+        <Link href="/api/auth/logout" legacyBehavior>
+          <a>Logout</a>
+        </Link>
         <br />
         Your nickname is {user.nickname}.
       </div>
     );
   }
-  return <a href="/api/auth/login">Login</a>;
+
+  return (
+    <Link href="/api/auth/login" legacyBehavior>
+      <a>Login</a>
+    </Link>
+  );
 }
 
 export default Index;
